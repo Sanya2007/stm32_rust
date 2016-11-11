@@ -19,7 +19,7 @@ CFLAGS += -Wl,--gc-sections
 
 # add startup file to build
 SRCS += low_level/startup_stm32f407xx.s
-SRCS += libtemp.a
+SRCS += libstm32_rust.a
 
 
 .PHONY: proj
@@ -33,5 +33,11 @@ $(PROJ_NAME).elf: $(SRCS)
 	$(OBJCOPY) -O ihex $(PROJ_NAME).elf $(PROJ_NAME).hex
 	$(OBJCOPY) -O binary $(PROJ_NAME).elf $(PROJ_NAME).bin
 
+libstm32_rust.a:
+	xargo build --target thumbv7em-none-eabihf --release
+	cp target/thumbv7em-none-eabihf/release/libstm32_rust.a ./
+
+
 clean:
-	rm -f *.o $(PROJ_NAME).elf $(PROJ_NAME).hex $(PROJ_NAME).bin
+	xargo clean
+	rm -f *.o $(PROJ_NAME).elf $(PROJ_NAME).hex $(PROJ_NAME).bin libstm32_rust.a

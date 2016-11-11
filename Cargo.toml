@@ -1,0 +1,9 @@
+[package]
+name = "stm32_rust"
+version = "0.1.0"
+authors = ["Oleksandr Prokopchuk <sanya.prokopchuk@gmail.com>"]
+
+[lib]
+crate-type = ["staticlib"]
+
+[dependencies]
