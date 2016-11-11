@@ -1,5 +1,5 @@
 # Put your source files here (or *.c, etc)
-SRCS=system_stm32f4xx.c
+SRCS=low_level/system_stm32f4xx.c
 
 # Binaries will be generated with this name (.elf, .bin, .hex, etc)
 PROJ_NAME=blinky
@@ -10,15 +10,15 @@ PROJ_NAME=blinky
 CC=arm-none-eabi-gcc
 OBJCOPY=arm-none-eabi-objcopy
 
-CFLAGS  = -g -O2 -Wall -Tstm32_flash.ld
+CFLAGS  = -g -O2 -Wall -Tlow_level/stm32_flash.ld
 CFLAGS += -mlittle-endian -mthumb -mcpu=cortex-m4 -mthumb-interwork
 CFLAGS += -mfloat-abi=hard -mfpu=fpv4-sp-d16
-CFLAGS += -I.
+CFLAGS += -Ilow_level
 CFLAGS += -Wl,--gc-sections
 
 
 # add startup file to build
-SRCS += startup_stm32f407xx.s
+SRCS += low_level/startup_stm32f407xx.s
 SRCS += libtemp.a
 
 
