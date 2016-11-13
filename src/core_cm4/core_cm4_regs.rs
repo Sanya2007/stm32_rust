@@ -1,22 +1,6 @@
 use ::volatile_reg32::*;
 
-/// Memory mapping of Cortex-M4 Hardware
-const SCS_BASE          : u32   = 0xE000E000;               /// System Control Space Base Address
-const ITM_BASE          : u32   = 0xE0000000;               /// ITM Base Address
-const CoreDebug_BASE    : u32   = 0xE000EDF0;               /// Core Debug Base Address
-const SysTick_BASE      : u32   = SCS_BASE + 0x0010;        /// SysTick Base Address
-const NVIC_BASE         : u32   = SCS_BASE + 0x0100;        /// NVIC Base Address
-const SCB_BASE          : u32   = SCS_BASE + 0x0D00;        /// System Control Block Base Address
-
-// #if (__MPU_PRESENT == 1)
-const MPU_BASE          : u32   = SCS_BASE + 0x0D90;        /// Memory Protection Unit
-  // #define MPU               ((MPU_Type       *)     MPU_BASE      )   /*!< Memory Protection Unit
-// #endif
-
-// #if (__FPU_PRESENT == 1)
-const FPU_BASE          : u32   = SCS_BASE + 0x0F30;        /// Floating Point Unit
-  // #define FPU               ((FPU_Type       *)     FPU_BASE      )   /*!< Floating Point Unit
-// #endif
+use super::core_cm4_const::*;
 
 // #define SCnSCB              ((SCnSCB_Type    *)     SCS_BASE      )   /*!< System control Register not in SCB
 // #define SCB                 ((SCB_Type       *)     SCB_BASE      )   /*!< SCB configuration struct

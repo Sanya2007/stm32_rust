@@ -11,7 +11,7 @@ mod core_cm4;
 
 use volatile_reg32::*;
 use stm32f4xx_regs::*;
-use core_cm4::*;
+use core_cm4::core_cm4_regs::*;
 
 #[lang = "panic_fmt"]
 #[no_mangle]
