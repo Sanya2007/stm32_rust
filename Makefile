@@ -32,10 +32,12 @@ $(PROJ_NAME).elf: $(SRCS)
 	$(OBJCOPY) -O ihex $(PROJ_NAME).elf $(PROJ_NAME).hex
 	$(OBJCOPY) -O binary $(PROJ_NAME).elf $(PROJ_NAME).bin
 
-libstm32_rust.a:
-	xargo build --target thumbv7em-none-eabihf --release
+libstm32_rust.a: build_libstm32
 	cp target/thumbv7em-none-eabihf/release/libstm32_rust.a ./
 
+.PHONY: build_libstm32
+build_libstm32:
+	xargo build --target thumbv7em-none-eabihf --release
 
 clean:
 	reset
