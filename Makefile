@@ -1,5 +1,4 @@
 # Put your source files here (or *.c, etc)
-SRCS=low_level/system_stm32f4xx.c
 
 # Binaries will be generated with this name (.elf, .bin, .hex, etc)
 PROJ_NAME=blinky
@@ -18,7 +17,7 @@ CFLAGS += -Wl,--gc-sections
 
 
 # add startup file to build
-SRCS += low_level/startup_stm32f407xx.s
+SRCS = low_level/startup_stm32f407xx.s
 SRCS += libstm32_rust.a
 
 
@@ -39,5 +38,6 @@ libstm32_rust.a:
 
 
 clean:
+	reset
 	xargo clean
 	rm -f *.o $(PROJ_NAME).elf $(PROJ_NAME).hex $(PROJ_NAME).bin libstm32_rust.a
