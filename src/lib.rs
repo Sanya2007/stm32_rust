@@ -56,11 +56,20 @@ pub extern fn main() {
     }
 
     let GPIOD = GPIO_Regs::init(GPIOPort::PortD);
-    GPIOD.MODER.set(1 << 26);
+    GPIOD.MODER.set(0x55000000);
 
     loop {
         ms_delay(500);
-        GPIOD.ODR.bit_xor(1 << 13);
+        GPIOD.ODR.set(1 << 12);
+
+        ms_delay(500);
+        GPIOD.ODR.set(1 << 13);
+
+        ms_delay(500);
+        GPIOD.ODR.set(1 << 14);
+
+        ms_delay(500);
+        GPIOD.ODR.set(1 << 15);
     }
 
 }
