@@ -5,4 +5,5 @@ pub mod gpio;
 pub mod pwr;
 pub mod rcc;
 pub mod spi;
+pub mod tim;
 
