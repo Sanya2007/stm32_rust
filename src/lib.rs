@@ -9,8 +9,13 @@ mod stm32f4xx;
 mod core_cm4;
 
 use volatile_reg32::*;
-use stm32f4xx::regs::*;
 use core_cm4::core_cm4_regs::*;
+
+use stm32f4xx::regs::flash::*;
+use stm32f4xx::regs::gpio::*;
+use stm32f4xx::regs::pwr::*;
+use stm32f4xx::regs::rcc::*;
+
 
 #[lang = "panic_fmt"]
 #[no_mangle]
