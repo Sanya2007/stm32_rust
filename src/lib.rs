@@ -9,7 +9,7 @@ mod stm32f4xx;
 mod core_cm4;
 
 use volatile_reg32::*;
-use stm32f4xx::stm32f4xx_regs::*;
+use stm32f4xx::regs::*;
 use core_cm4::core_cm4_regs::*;
 
 #[lang = "panic_fmt"]
@@ -113,7 +113,7 @@ pub extern fn SystemInit() {
     // #else
     //     SCB->VTOR = FLASH_BASE | VECT_TAB_OFFSET; /* Vector Table Relocation in Internal FLASH */
     // #endif
-    scb.VTOR.set(stm32f4xx::stm32f4xx_const::FLASH_BASE);
+    scb.VTOR.set(stm32f4xx::constants::FLASH_BASE);
 }
 
 

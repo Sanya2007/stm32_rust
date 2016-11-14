@@ -1,2 +1,2 @@
-pub mod stm32f4xx_const;
-pub mod stm32f4xx_regs;
+pub mod constants;
+pub mod regs;
