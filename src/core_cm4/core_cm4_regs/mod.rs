@@ -3,7 +3,7 @@
 use ::volatile_reg32::*;
 use super::core_cm4_const::*;
 
-pub mod fpu_regs;
+pub mod fpu;
 
 // #define SCnSCB              ((SCnSCB_Type    *)     SCS_BASE      )   /*!< System control Register not in SCB
 // #define SCB                 ((SCB_Type       *)     SCB_BASE      )   /*!< SCB configuration struct
