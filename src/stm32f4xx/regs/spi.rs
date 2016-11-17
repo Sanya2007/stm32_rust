@@ -3,72 +3,72 @@
 //! Serial Peripheral Interface registers
 
 use ::volatile_reg32::*;
-use super::constants::{ I2S2ext_BASE,
-                        I2S3ext_BASE,
+use super::constants::{ I2S2_EXT_BASE,
+                        I2S3_EXT_BASE,
                         SPI1_BASE,
                         SPI2_BASE,
                         SPI3_BASE,
                         };
 
 
-struct SPI_Regs
+struct SpiRegs
 {
     /// SPI control register 1 (not used in I2S mode)
-    pub CR1     : VolatileReg32,
+    pub cr1     : VolatileReg32,
 
     /// SPI control register 2
-    pub CR2     : VolatileReg32,
+    pub cr2     : VolatileReg32,
 
     /// SPI status register
-    pub SR      : VolatileReg32,
+    pub sr      : VolatileReg32,
 
     /// SPI data register
-    pub DR      : VolatileReg32,
+    pub dr      : VolatileReg32,
 
     /// SPI CRC polynomial register (not used in I2S mode)
-    pub CRCPR   : VolatileReg32,
+    pub crcpr   : VolatileReg32,
 
     /// SPI RX CRC register (not used in I2S mode)
-    pub RXCRCR  : VolatileReg32,
+    pub rxcrcr  : VolatileReg32,
 
     /// SPI TX CRC register (not used in I2S mode)
-    pub TXCRCR  : VolatileReg32,
+    pub txcrcr  : VolatileReg32,
 
     /// SPI_I2S configuration register
-    pub I2SCFGR : VolatileReg32,
+    pub i2scfgr : VolatileReg32,
 
     /// SPI_I2S prescaler register
-    pub I2SPR   : VolatileReg32,
+    pub i2spr   : VolatileReg32,
 }
 
-pub enum SPIInst {
-    I2S2ext,
-    I2S3ext,
-    SPI1,
-    SPI2,
-    SPI3,
+pub enum SpiInst {
+    I2s2ext,
+    I2s3ext,
+    Spi1,
+    Spi2,
+    Spi3,
 }
 
-impl SPI_Regs {
-    pub fn init(inst: SPIInst) -> SPI_Regs {
+impl SpiRegs {
+    pub fn init(inst: SpiInst) -> SpiRegs {
         let spi_base: *mut u32 = match inst {
-            SPIInst::I2S2ext    => I2S2ext_BASE,
-            SPIInst::I2S3ext    => I2S3ext_BASE,
-            SPIInst::SPI1       => SPI1_BASE,
-            SPIInst::SPI2       => SPI2_BASE,
-            SPIInst::SPI3       => SPI3_BASE,
+            SpiInst::I2s2ext    => I2S2_EXT_BASE,
+            SpiInst::I2s3ext    => I2S3_EXT_BASE,
+            SpiInst::Spi1       => SPI1_BASE,
+            SpiInst::Spi2       => SPI2_BASE,
+            SpiInst::Spi3       => SPI3_BASE,
         } as *mut u32;
 
-        let spi = SPI_Regs {
-            CR1     : VolatileReg32::new(spi_base),
-            CR2     : VolatileReg32::new_offset(spi_base, 1),
-            SR      : VolatileReg32::new_offset(spi_base, 2),
-            DR      : VolatileReg32::new_offset(spi_base, 3),
-            CRCPR   : VolatileReg32::new_offset(spi_base, 4),
-            RXCRCR  : VolatileReg32::new_offset(spi_base, 5),
-            TXCRCR  : VolatileReg32::new_offset(spi_base, 6),
-            I2SCFGR : VolatileReg32::new_offset(spi_base, 7),
-            I2SPR   : VolatileReg32::new_offset(spi_base, 8),
+        let spi = SpiRegs {
+            cr1     : VolatileReg32::new(spi_base),
+            cr2     : VolatileReg32::new_offset(spi_base, 1),
+            sr      : VolatileReg32::new_offset(spi_base, 2),
+            dr      : VolatileReg32::new_offset(spi_base, 3),
+            crcpr   : VolatileReg32::new_offset(spi_base, 4),
+            rxcrcr  : VolatileReg32::new_offset(spi_base, 5),
+            txcrcr  : VolatileReg32::new_offset(spi_base, 6),
+            i2scfgr : VolatileReg32::new_offset(spi_base, 7),
+            i2spr   : VolatileReg32::new_offset(spi_base, 8),
         };
 
         spi

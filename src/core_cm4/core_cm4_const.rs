@@ -9,10 +9,10 @@ pub const SCS_BASE          : u32   = 0xE000E000;
 pub const ITM_BASE          : u32   = 0xE0000000;
 
 /// Core Debug Base Address
-pub const CoreDebug_BASE    : u32   = 0xE000EDF0;
+pub const CORE_DEBUG_BASE   : u32   = 0xE000EDF0;
 
 /// SysTick Base Address
-pub const SysTick_BASE      : u32   = SCS_BASE + 0x0010;
+pub const SYS_TICK_BASE     : u32   = SCS_BASE + 0x0010;
 
 /// NVIC Base Address
 pub const NVIC_BASE         : u32   = SCS_BASE + 0x0100;

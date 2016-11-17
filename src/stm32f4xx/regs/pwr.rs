@@ -6,23 +6,23 @@ use ::volatile_reg32::*;
 use super::constants::PWR_BASE;
 
 
-pub struct PWR_Regs
+pub struct PwrRegs
 {
     /// PWR power control register
-    pub CR  : VolatileReg32,
+    pub cr  : VolatileReg32,
 
     /// PWR power control/status register
-    pub CSR : VolatileReg32,
+    pub csr : VolatileReg32,
 }
 
-impl PWR_Regs {
+impl PwrRegs {
 
-    pub fn init() -> PWR_Regs {
+    pub fn init() -> PwrRegs {
         let pwr_base: *mut u32 = PWR_BASE as *mut u32;
 
-        let pwr: PWR_Regs = PWR_Regs {
-            CR  : VolatileReg32::new(pwr_base),
-            CSR : VolatileReg32::new_offset(pwr_base, 1),
+        let pwr = PwrRegs {
+            cr  : VolatileReg32::new(pwr_base),
+            csr : VolatileReg32::new_offset(pwr_base, 1),
         };
 
         pwr

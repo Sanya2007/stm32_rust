@@ -14,42 +14,41 @@ use super::constants::{ GPIOA_BASE,
                         GPIOI_BASE,
                         };
 
-pub struct GPIO_Regs {
+pub struct GpioRegs {
     /// GPIO port mode register,
-    pub MODER   : VolatileReg32,
+    pub moder   : VolatileReg32,
 
     /// GPIO port output type register,
-    pub OTYPER  : VolatileReg32,
-
+    pub otyper  : VolatileReg32,
     /// GPIO port output speed register,
-    pub OSPEEDR : VolatileReg32,
+    pub ospeedr : VolatileReg32,
 
     /// GPIO port pull-up/pull-down register,
-    pub PUPDR   : VolatileReg32,
+    pub pupdr   : VolatileReg32,
 
     /// GPIO port input data register,
-    pub IDR     : VolatileReg32,
+    pub idr     : VolatileReg32,
 
     /// GPIO port output data register,
-    pub ODR     : VolatileReg32,
+    pub odr     : VolatileReg32,
 
     /// GPIO port bit set/reset low register,
-    pub BSRRL   : VolatileReg32,
+    pub bsrrl   : VolatileReg32,
 
     /// GPIO port bit set/reset high register,
-    pub BSRRH   : VolatileReg32,
+    pub bsrrh   : VolatileReg32,
 
     /// GPIO port configuration lock register,
-    pub LCKR    : VolatileReg32,
+    pub lckr    : VolatileReg32,
 
     /// GPIO alternate function registers,
-    pub AFR0    : VolatileReg32,
+    pub afr0    : VolatileReg32,
 
     /// GPIO alternate function registers,
-    pub AFR1    : VolatileReg32,
+    pub afr1    : VolatileReg32,
 }
 
-pub enum GPIOPort {
+pub enum GpioPort {
     PortA,
     PortB,
     PortC,
@@ -61,32 +60,32 @@ pub enum GPIOPort {
     PortI,
 }
 
-impl GPIO_Regs {
-    pub fn init(port: GPIOPort) -> GPIO_Regs {
+impl GpioRegs {
+    pub fn init(port: GpioPort) -> GpioRegs {
         let gpio_base: *mut u32 = match port {
-            GPIOPort::PortA => GPIOA_BASE,
-            GPIOPort::PortB => GPIOB_BASE,
-            GPIOPort::PortC => GPIOC_BASE,
-            GPIOPort::PortD => GPIOD_BASE,
-            GPIOPort::PortE => GPIOE_BASE,
-            GPIOPort::PortF => GPIOF_BASE,
-            GPIOPort::PortG => GPIOG_BASE,
-            GPIOPort::PortH => GPIOH_BASE,
-            GPIOPort::PortI => GPIOI_BASE,
+            GpioPort::PortA => GPIOA_BASE,
+            GpioPort::PortB => GPIOB_BASE,
+            GpioPort::PortC => GPIOC_BASE,
+            GpioPort::PortD => GPIOD_BASE,
+            GpioPort::PortE => GPIOE_BASE,
+            GpioPort::PortF => GPIOF_BASE,
+            GpioPort::PortG => GPIOG_BASE,
+            GpioPort::PortH => GPIOH_BASE,
+            GpioPort::PortI => GPIOI_BASE,
         } as *mut u32;
 
-        let gpio = GPIO_Regs {
-            MODER   : VolatileReg32::new(gpio_base),
-            OTYPER  : VolatileReg32::new_offset(gpio_base, 1),
-            OSPEEDR : VolatileReg32::new_offset(gpio_base, 2),
-            PUPDR   : VolatileReg32::new_offset(gpio_base, 3),
-            IDR     : VolatileReg32::new_offset(gpio_base, 4),
-            ODR     : VolatileReg32::new_offset(gpio_base, 5),
-            BSRRL   : VolatileReg32::new_offset(gpio_base, 6),
-            BSRRH   : VolatileReg32::new_offset(gpio_base, 7),
-            LCKR    : VolatileReg32::new_offset(gpio_base, 8),
-            AFR0    : VolatileReg32::new_offset(gpio_base, 9),
-            AFR1    : VolatileReg32::new_offset(gpio_base, 10),
+        let gpio = GpioRegs {
+            moder   : VolatileReg32::new(gpio_base),
+            otyper  : VolatileReg32::new_offset(gpio_base, 1),
+            ospeedr : VolatileReg32::new_offset(gpio_base, 2),
+            pupdr   : VolatileReg32::new_offset(gpio_base, 3),
+            idr     : VolatileReg32::new_offset(gpio_base, 4),
+            odr     : VolatileReg32::new_offset(gpio_base, 5),
+            bsrrl   : VolatileReg32::new_offset(gpio_base, 6),
+            bsrrh   : VolatileReg32::new_offset(gpio_base, 7),
+            lckr    : VolatileReg32::new_offset(gpio_base, 8),
+            afr0    : VolatileReg32::new_offset(gpio_base, 9),
+            afr1    : VolatileReg32::new_offset(gpio_base, 10),
         };
 
         gpio

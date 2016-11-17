@@ -6,39 +6,39 @@ use ::volatile_reg32::*;
 use super::constants::FLASH_R_BASE;
 
 
-pub struct FLASH_Regs{
+pub struct FlashRegs{
 
     /// FLASH access control register
-    pub ACR     : VolatileReg32,
+    pub acr     : VolatileReg32,
 
     /// FLASH key register
-    pub KEYR    : VolatileReg32,
+    pub keyr    : VolatileReg32,
 
     /// FLASH option key register
-    pub OPTKEYR : VolatileReg32,
+    pub optkeyr : VolatileReg32,
 
     /// FLASH status register
-    pub SR      : VolatileReg32,
+    pub sr      : VolatileReg32,
 
     /// FLASH control register
-    pub CR      : VolatileReg32,
+    pub cr      : VolatileReg32,
 
     /// FLASH option control register
-    pub OPTCR   : VolatileReg32,
+    pub optcr   : VolatileReg32,
 }
 
-impl FLASH_Regs {
+impl FlashRegs {
 
-    pub fn init() -> FLASH_Regs {
+    pub fn init() -> FlashRegs {
         let flash_base: *mut u32 = FLASH_R_BASE as *mut u32;
 
-        let flash = FLASH_Regs {
-            ACR     : VolatileReg32::new(flash_base),
-            KEYR    : VolatileReg32::new_offset(flash_base, 1),
-            OPTKEYR : VolatileReg32::new_offset(flash_base, 2),
-            SR      : VolatileReg32::new_offset(flash_base, 3),
-            CR      : VolatileReg32::new_offset(flash_base, 4),
-            OPTCR   : VolatileReg32::new_offset(flash_base, 5),
+        let flash = FlashRegs {
+            acr     : VolatileReg32::new(flash_base),
+            keyr    : VolatileReg32::new_offset(flash_base, 1),
+            optkeyr : VolatileReg32::new_offset(flash_base, 2),
+            sr      : VolatileReg32::new_offset(flash_base, 3),
+            cr      : VolatileReg32::new_offset(flash_base, 4),
+            optcr   : VolatileReg32::new_offset(flash_base, 5),
         };
 
         flash
@@ -94,8 +94,8 @@ pub const FLASH_OPTCR_BOR_LEV_0     : u32   = 0x00000004;
 pub const FLASH_OPTCR_BOR_LEV_1     : u32   = 0x00000008;
 pub const FLASH_OPTCR_BOR_LEV       : u32   = 0x0000000C;
 pub const FLASH_OPTCR_WDG_SW        : u32   = 0x00000020;
-pub const FLASH_OPTCR_nRST_STOP     : u32   = 0x00000040;
-pub const FLASH_OPTCR_nRST_STDBY    : u32   = 0x00000080;
+pub const FLASH_OPTCR_N_RST_STOP    : u32   = 0x00000040;
+pub const FLASH_OPTCR_N_RST_STDBY   : u32   = 0x00000080;
 pub const FLASH_OPTCR_RDP_0         : u32   = 0x00000100;
 pub const FLASH_OPTCR_RDP_1         : u32   = 0x00000200;
 pub const FLASH_OPTCR_RDP_2         : u32   = 0x00000400;
@@ -104,15 +104,15 @@ pub const FLASH_OPTCR_RDP_4         : u32   = 0x00001000;
 pub const FLASH_OPTCR_RDP_5         : u32   = 0x00002000;
 pub const FLASH_OPTCR_RDP_6         : u32   = 0x00004000;
 pub const FLASH_OPTCR_RDP_7         : u32   = 0x00008000;
-pub const FLASH_OPTCR_nWRP_0        : u32   = 0x00010000;
-pub const FLASH_OPTCR_nWRP_1        : u32   = 0x00020000;
-pub const FLASH_OPTCR_nWRP_2        : u32   = 0x00040000;
-pub const FLASH_OPTCR_nWRP_3        : u32   = 0x00080000;
-pub const FLASH_OPTCR_nWRP_4        : u32   = 0x00100000;
-pub const FLASH_OPTCR_nWRP_5        : u32   = 0x00200000;
-pub const FLASH_OPTCR_nWRP_6        : u32   = 0x00400000;
-pub const FLASH_OPTCR_nWRP_7        : u32   = 0x00800000;
-pub const FLASH_OPTCR_nWRP_8        : u32   = 0x01000000;
-pub const FLASH_OPTCR_nWRP_9        : u32   = 0x02000000;
-pub const FLASH_OPTCR_nWRP_10       : u32   = 0x04000000;
-pub const FLASH_OPTCR_nWRP_11       : u32   = 0x08000000;
+pub const FLASH_OPTCR_N_WRP_0       : u32   = 0x00010000;
+pub const FLASH_OPTCR_N_WRP_1       : u32   = 0x00020000;
+pub const FLASH_OPTCR_N_WRP_2       : u32   = 0x00040000;
+pub const FLASH_OPTCR_N_WRP_3       : u32   = 0x00080000;
+pub const FLASH_OPTCR_N_WRP_4       : u32   = 0x00100000;
+pub const FLASH_OPTCR_N_WRP_5       : u32   = 0x00200000;
+pub const FLASH_OPTCR_N_WRP_6       : u32   = 0x00400000;
+pub const FLASH_OPTCR_N_WRP_7       : u32   = 0x00800000;
+pub const FLASH_OPTCR_N_WRP_8       : u32   = 0x01000000;
+pub const FLASH_OPTCR_N_WRP_9       : u32   = 0x02000000;
+pub const FLASH_OPTCR_N_WRP_10      : u32   = 0x04000000;
+pub const FLASH_OPTCR_N_WRP_11      : u32   = 0x08000000;

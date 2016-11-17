@@ -6,118 +6,118 @@ use ::volatile_reg32::*;
 use super::constants::RCC_BASE;
 
 
-pub struct RCC_Regs {
+pub struct RccRegs {
     /// RCC clock control register,
-    pub CR              : VolatileReg32,
+    pub cr              : VolatileReg32,
 
     /// RCC PLL configuration register,
-    pub PLLCFGR         : VolatileReg32,
+    pub pllcfgr         : VolatileReg32,
 
     /// RCC clock configuration register,
-    pub CFGR            : VolatileReg32,
+    pub cfgr            : VolatileReg32,
 
     /// RCC clock interrupt register,
-    pub CIR             : VolatileReg32,
+    pub cir             : VolatileReg32,
 
     /// RCC AHB1 peripheral reset register,
-    pub AHB1RSTR        : VolatileReg32,
+    pub ahb1rstr        : VolatileReg32,
 
     /// RCC AHB2 peripheral reset register,
-    pub AHB2RSTR        : VolatileReg32,
+    pub ahb2rstr        : VolatileReg32,
 
     /// RCC AHB3 peripheral reset register,
-    pub AHB3RSTR        : VolatileReg32,
+    pub ahb3rstr        : VolatileReg32,
 
     /// RCC APB1 peripheral reset register,
-    pub APB1RSTR        : VolatileReg32,
+    pub apb1rstr        : VolatileReg32,
 
     /// RCC APB2 peripheral reset register,
-    pub APB2RSTR        : VolatileReg32,
+    pub apb2rstr        : VolatileReg32,
 
     /// RCC AHB1 peripheral clock register,
-    pub AHB1ENR         : VolatileReg32,
+    pub ahb1enr         : VolatileReg32,
 
     /// RCC AHB2 peripheral clock register,
-    pub AHB2ENR         : VolatileReg32,
+    pub ahb2enr         : VolatileReg32,
 
     /// RCC AHB3 peripheral clock register,
-    pub AHB3ENR         : VolatileReg32,
+    pub ahb3enr         : VolatileReg32,
 
     /// RCC APB1 peripheral clock enable register,
-    pub APB1ENR         : VolatileReg32,
+    pub apb1enr         : VolatileReg32,
 
     /// RCC APB2 peripheral clock enable register,
-    pub APB2ENR         : VolatileReg32,
+    pub apb2enr         : VolatileReg32,
 
     /// RCC AHB1 peripheral clock enable in low power mode register,
-    pub AHB1LPENR       : VolatileReg32,
+    pub ahb1lpenr       : VolatileReg32,
 
     /// RCC AHB2 peripheral clock enable in low power mode register,
-    pub AHB2LPENR       : VolatileReg32,
+    pub ahb2lpenr       : VolatileReg32,
 
     /// RCC AHB3 peripheral clock enable in low power mode register,
-    pub AHB3LPENR       : VolatileReg32,
+    pub ahb3lpenr       : VolatileReg32,
 
     /// RCC APB1 peripheral clock enable in low power mode register,
-    pub APB1LPENR       : VolatileReg32,
+    pub apb1lpenr       : VolatileReg32,
 
     /// RCC APB2 peripheral clock enable in low power mode register,
-    pub APB2LPENR       : VolatileReg32,
+    pub apb2lpenr       : VolatileReg32,
 
     /// RCC Backup domain control register,
-    pub BDCR            : VolatileReg32,
+    pub bdcr            : VolatileReg32,
 
     /// RCC clock control & status register,
-    pub CSR             : VolatileReg32,
+    pub csr             : VolatileReg32,
 
     /// RCC spread spectrum clock generation register,
-    pub SSCGR           : VolatileReg32,
+    pub sscgr           : VolatileReg32,
 
     /// RCC PLLI2S configuration register,
-    pub PLLI2SCFGR      : VolatileReg32,
+    pub plli2scfgr      : VolatileReg32,
 }
 
-impl RCC_Regs {
+impl RccRegs {
 
-    pub fn init() -> RCC_Regs {
+    pub fn init() -> RccRegs {
 
         let rcc_base: *mut u32 = RCC_BASE as *mut u32;
 
-        let rcc: RCC_Regs = RCC_Regs {
-            CR              : VolatileReg32::new(rcc_base),
-            PLLCFGR         : VolatileReg32::new_offset(rcc_base, 1),
-            CFGR            : VolatileReg32::new_offset(rcc_base, 2),
-            CIR             : VolatileReg32::new_offset(rcc_base, 3),
-            AHB1RSTR        : VolatileReg32::new_offset(rcc_base, 4),
-            AHB2RSTR        : VolatileReg32::new_offset(rcc_base, 5),
-            AHB3RSTR        : VolatileReg32::new_offset(rcc_base, 6),
-            // RESERVED0    :                                     7
-            APB1RSTR        : VolatileReg32::new_offset(rcc_base, 8),
-            APB2RSTR        : VolatileReg32::new_offset(rcc_base, 9),
-            // RESERVED1[0] :                                     10
-            // RESERVED1[1] :                                     11
-            AHB1ENR         : VolatileReg32::new_offset(rcc_base, 12),
-            AHB2ENR         : VolatileReg32::new_offset(rcc_base, 13),
-            AHB3ENR         : VolatileReg32::new_offset(rcc_base, 14),
-            // RESERVED2    :                                     15
-            APB1ENR         : VolatileReg32::new_offset(rcc_base, 16),
-            APB2ENR         : VolatileReg32::new_offset(rcc_base, 17),
-            // RESERVED3[0] :                                     18
-            // RESERVED3[1] :                                     19
-            AHB1LPENR       : VolatileReg32::new_offset(rcc_base, 20),
-            AHB2LPENR       : VolatileReg32::new_offset(rcc_base, 21),
-            AHB3LPENR       : VolatileReg32::new_offset(rcc_base, 22),
-            // RESERVED4    :                                     23
-            APB1LPENR       : VolatileReg32::new_offset(rcc_base, 24),
-            APB2LPENR       : VolatileReg32::new_offset(rcc_base, 25),
-            // RESERVED5[0] :                                     26
-            // RESERVED5[1] :                                     27
-            BDCR            : VolatileReg32::new_offset(rcc_base, 28),
-            CSR             : VolatileReg32::new_offset(rcc_base, 29),
-            // RESERVED6[0] :                                     30
-            // RESERVED6[1] :                                     31
-            SSCGR           : VolatileReg32::new_offset(rcc_base, 32),
-            PLLI2SCFGR      : VolatileReg32::new_offset(rcc_base, 33),
+        let rcc = RccRegs {
+            cr              : VolatileReg32::new(rcc_base),
+            pllcfgr         : VolatileReg32::new_offset(rcc_base, 1),
+            cfgr            : VolatileReg32::new_offset(rcc_base, 2),
+            cir             : VolatileReg32::new_offset(rcc_base, 3),
+            ahb1rstr        : VolatileReg32::new_offset(rcc_base, 4),
+            ahb2rstr        : VolatileReg32::new_offset(rcc_base, 5),
+            ahb3rstr        : VolatileReg32::new_offset(rcc_base, 6),
+            // reserved0    :                                     7
+            apb1rstr        : VolatileReg32::new_offset(rcc_base, 8),
+            apb2rstr        : VolatileReg32::new_offset(rcc_base, 9),
+            // reserved1[0] :                                     10
+            // reserved1[1] :                                     11
+            ahb1enr         : VolatileReg32::new_offset(rcc_base, 12),
+            ahb2enr         : VolatileReg32::new_offset(rcc_base, 13),
+            ahb3enr         : VolatileReg32::new_offset(rcc_base, 14),
+            // reserved2    :                                     15
+            apb1enr         : VolatileReg32::new_offset(rcc_base, 16),
+            apb2enr         : VolatileReg32::new_offset(rcc_base, 17),
+            // reserved3[0] :                                     18
+            // reserved3[1] :                                     19
+            ahb1lpenr       : VolatileReg32::new_offset(rcc_base, 20),
+            ahb2lpenr       : VolatileReg32::new_offset(rcc_base, 21),
+            ahb3lpenr       : VolatileReg32::new_offset(rcc_base, 22),
+            // reserved4    :                                     23
+            apb1lpenr       : VolatileReg32::new_offset(rcc_base, 24),
+            apb2lpenr       : VolatileReg32::new_offset(rcc_base, 25),
+            // reserved5[0] :                                     26
+            // reserved5[1] :                                     27
+            bdcr            : VolatileReg32::new_offset(rcc_base, 28),
+            csr             : VolatileReg32::new_offset(rcc_base, 29),
+            // reserved6[0] :                                     30
+            // reserved6[1] :                                     31
+            sscgr           : VolatileReg32::new_offset(rcc_base, 32),
+            plli2scfgr      : VolatileReg32::new_offset(rcc_base, 33),
         };
 
         rcc

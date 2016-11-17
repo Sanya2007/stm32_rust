@@ -19,73 +19,73 @@ use super::constants::{ TIM1_BASE,
                         TIM14_BASE,
                         };
 
-pub struct TIM_Regs
+pub struct TimRegs
 {
     /// TIM control register 1
-    pub CR1     : VolatileReg32,
+    pub cr1     : VolatileReg32,
 
     /// TIM control register 2
-    pub CR2     : VolatileReg32,
+    pub cr2     : VolatileReg32,
 
     /// TIM slave mode control register
-    pub SMCR    : VolatileReg32,
+    pub smcr    : VolatileReg32,
 
     /// TIM DMA/interrupt enable register
-    pub DIER    : VolatileReg32,
+    pub dier    : VolatileReg32,
 
     /// TIM status register
-    pub SR      : VolatileReg32,
+    pub sr      : VolatileReg32,
 
     /// TIM event generation register
-    pub EGR     : VolatileReg32,
+    pub egr     : VolatileReg32,
 
     /// TIM capture/compare mode register 1
-    pub CCMR1   : VolatileReg32,
+    pub ccmr1   : VolatileReg32,
 
     /// TIM capture/compare mode register 2
-    pub CCMR2   : VolatileReg32,
+    pub ccmr2   : VolatileReg32,
 
     /// TIM capture/compare enable register
-    pub CCER    : VolatileReg32,
+    pub ccer    : VolatileReg32,
 
     /// TIM counter register
-    pub CNT     : VolatileReg32,
+    pub cnt     : VolatileReg32,
 
     /// TIM prescaler
-    pub PSC     : VolatileReg32,
+    pub psc     : VolatileReg32,
 
     /// TIM auto-reload register
-    pub ARR     : VolatileReg32,
+    pub arr     : VolatileReg32,
 
     /// TIM repetition counter register
-    pub RCR     : VolatileReg32,
+    pub rcr     : VolatileReg32,
 
     /// TIM capture/compare register 1
-    pub CCR1    : VolatileReg32,
+    pub ccr1    : VolatileReg32,
 
     /// TIM capture/compare register 2
-    pub CCR2    : VolatileReg32,
+    pub ccr2    : VolatileReg32,
 
     /// TIM capture/compare register 3
-    pub CCR3    : VolatileReg32,
+    pub ccr3    : VolatileReg32,
 
     /// TIM capture/compare register 4
-    pub CCR4    : VolatileReg32,
+    pub ccr4    : VolatileReg32,
 
     /// TIM break and dead-time register
-    pub BDTR    : VolatileReg32,
+    pub bdtr    : VolatileReg32,
 
     /// TIM DMA control register
-    pub DCR     : VolatileReg32,
+    pub dcr     : VolatileReg32,
 
     /// TIM DMA address for full transfer
-    pub DMAR    : VolatileReg32,
+    pub dmar    : VolatileReg32,
 
     /// TIM option register
-    pub OR      : VolatileReg32,
+    pub or      : VolatileReg32,
 }
 
-pub enum TIMInst {
+pub enum TimInst {
     TIM1,   // TIM1_BASE
     TIM2,   // TIM2_BASE
     TIM3,   // TIM3_BASE
@@ -102,47 +102,47 @@ pub enum TIMInst {
     TIM14,  // TIM14_BASE
 }
 
-impl TIMInst {
-    pub fn init(tim_inst: TIMInst) -> TIM_Regs {
+impl TimInst {
+    pub fn init(tim_inst: TimInst) -> TimRegs {
         let tim_base = match tim_inst {
-            TIMInst::TIM1   => TIM1_BASE,
-            TIMInst::TIM2   => TIM2_BASE,
-            TIMInst::TIM3   => TIM3_BASE,
-            TIMInst::TIM4   => TIM4_BASE,
-            TIMInst::TIM5   => TIM5_BASE,
-            TIMInst::TIM6   => TIM6_BASE,
-            TIMInst::TIM7   => TIM7_BASE,
-            TIMInst::TIM8   => TIM8_BASE,
-            TIMInst::TIM9   => TIM9_BASE,
-            TIMInst::TIM10  => TIM10_BASE,
-            TIMInst::TIM11  => TIM11_BASE,
-            TIMInst::TIM12  => TIM12_BASE,
-            TIMInst::TIM13  => TIM13_BASE,
-            TIMInst::TIM14  => TIM14_BASE,
+            TimInst::TIM1   => TIM1_BASE,
+            TimInst::TIM2   => TIM2_BASE,
+            TimInst::TIM3   => TIM3_BASE,
+            TimInst::TIM4   => TIM4_BASE,
+            TimInst::TIM5   => TIM5_BASE,
+            TimInst::TIM6   => TIM6_BASE,
+            TimInst::TIM7   => TIM7_BASE,
+            TimInst::TIM8   => TIM8_BASE,
+            TimInst::TIM9   => TIM9_BASE,
+            TimInst::TIM10  => TIM10_BASE,
+            TimInst::TIM11  => TIM11_BASE,
+            TimInst::TIM12  => TIM12_BASE,
+            TimInst::TIM13  => TIM13_BASE,
+            TimInst::TIM14  => TIM14_BASE,
         } as *mut u32;
 
-        let tim = TIM_Regs {
-            CR1     : VolatileReg32::new(tim_base),
-            CR2     : VolatileReg32::new_offset(tim_base, 1),
-            SMCR    : VolatileReg32::new_offset(tim_base, 2),
-            DIER    : VolatileReg32::new_offset(tim_base, 3),
-            SR      : VolatileReg32::new_offset(tim_base, 4),
-            EGR     : VolatileReg32::new_offset(tim_base, 5),
-            CCMR1   : VolatileReg32::new_offset(tim_base, 6),
-            CCMR2   : VolatileReg32::new_offset(tim_base, 7),
-            CCER    : VolatileReg32::new_offset(tim_base, 8),
-            CNT     : VolatileReg32::new_offset(tim_base, 9),
-            PSC     : VolatileReg32::new_offset(tim_base, 10),
-            ARR     : VolatileReg32::new_offset(tim_base, 11),
-            RCR     : VolatileReg32::new_offset(tim_base, 12),
-            CCR1    : VolatileReg32::new_offset(tim_base, 13),
-            CCR2    : VolatileReg32::new_offset(tim_base, 14),
-            CCR3    : VolatileReg32::new_offset(tim_base, 15),
-            CCR4    : VolatileReg32::new_offset(tim_base, 16),
-            BDTR    : VolatileReg32::new_offset(tim_base, 17),
-            DCR     : VolatileReg32::new_offset(tim_base, 18),
-            DMAR    : VolatileReg32::new_offset(tim_base, 19),
-            OR      : VolatileReg32::new_offset(tim_base, 20),
+        let tim = TimRegs {
+            cr1     : VolatileReg32::new(tim_base),
+            cr2     : VolatileReg32::new_offset(tim_base, 1),
+            smcr    : VolatileReg32::new_offset(tim_base, 2),
+            dier    : VolatileReg32::new_offset(tim_base, 3),
+            sr      : VolatileReg32::new_offset(tim_base, 4),
+            egr     : VolatileReg32::new_offset(tim_base, 5),
+            ccmr1   : VolatileReg32::new_offset(tim_base, 6),
+            ccmr2   : VolatileReg32::new_offset(tim_base, 7),
+            ccer    : VolatileReg32::new_offset(tim_base, 8),
+            cnt     : VolatileReg32::new_offset(tim_base, 9),
+            psc     : VolatileReg32::new_offset(tim_base, 10),
+            arr     : VolatileReg32::new_offset(tim_base, 11),
+            rcr     : VolatileReg32::new_offset(tim_base, 12),
+            ccr1    : VolatileReg32::new_offset(tim_base, 13),
+            ccr2    : VolatileReg32::new_offset(tim_base, 14),
+            ccr3    : VolatileReg32::new_offset(tim_base, 15),
+            ccr4    : VolatileReg32::new_offset(tim_base, 16),
+            bdtr    : VolatileReg32::new_offset(tim_base, 17),
+            dcr     : VolatileReg32::new_offset(tim_base, 18),
+            dmar    : VolatileReg32::new_offset(tim_base, 19),
+            or      : VolatileReg32::new_offset(tim_base, 20),
         };
 
         tim
