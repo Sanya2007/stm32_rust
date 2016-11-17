@@ -3,7 +3,7 @@
 //! Type definitions for the Cortex-M4 System Control Block registers
 
 use ::volatile_reg32::*;
-use super::super::constants::*;
+use super::super::constants::SCB_BASE;
 
 /// Structure type to access the System Control Block (SCB).
 

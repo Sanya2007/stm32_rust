@@ -3,7 +3,7 @@
 //! Type definitions for the Cortex-M Floating Point Unit (FPU)
 
 use ::volatile_reg32::*;
-use super::super::constants::*;
+use super::super::constants::FPU_BASE;
 
 /// Structure type to access the Floating Point Unit (FPU).
 struct FpuRegs

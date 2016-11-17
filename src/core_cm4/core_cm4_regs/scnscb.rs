@@ -1,7 +1,7 @@
 #![allow(dead_code)]
 
 use ::volatile_reg32::*;
-use super::super::constants::*;
+use super::super::constants::SCS_BASE;
 
 /// Structure type to access the System Control and ID Register not in the SCB.
 pub struct ScNScbRegs {
