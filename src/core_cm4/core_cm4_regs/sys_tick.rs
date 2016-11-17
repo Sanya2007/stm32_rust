@@ -19,7 +19,7 @@ impl SysTickRegs {
     pub fn init() -> SysTickRegs {
         let sys_tick_base: *mut u32 = SYS_TICK_BASE as *mut u32;
 
-        sys_tick_regs = SysTickRegs {
+        let sys_tick_regs = SysTickRegs {
             ctrl    : VolatileReg32::new(sys_tick_base),
             load    : VolatileReg32::new_offset(sys_tick_base, 1),
             val     : VolatileReg32::new_offset(sys_tick_base, 2),
