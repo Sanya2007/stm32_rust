@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 
 //! Reset and Clock Control registers
 

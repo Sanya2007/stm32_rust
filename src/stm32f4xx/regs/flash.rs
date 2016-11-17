@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 //! FLASH registers
 
 use ::volatile_reg32::*;

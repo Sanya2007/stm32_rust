@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 use ::volatile_reg32::*;
 use super::core_cm4_const::*;
 

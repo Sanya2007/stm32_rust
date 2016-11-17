@@ -1,3 +1,4 @@
+#![allow(dead_code)]
 
 //! General Purpose I/O registers
 

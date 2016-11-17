@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 //! Memory mapping of Cortex-M4 Hardware
 
 /// System Control Space Base Address

@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 use core::intrinsics::volatile_store;
 use core::intrinsics::volatile_load;
 
