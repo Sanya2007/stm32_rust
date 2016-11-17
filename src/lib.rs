@@ -8,7 +8,6 @@ mod volatile_reg32;
 mod stm32f4xx;
 mod core_cm4;
 
-use volatile_reg32::*;
 use core_cm4::core_cm4_regs::*;
 
 use stm32f4xx::regs::flash::*;
