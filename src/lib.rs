@@ -75,7 +75,7 @@ pub extern fn main() {
 }
 
 #[no_mangle]
-pub extern fn SystemInit() {
+pub extern fn system_init() {
 
     let rcc = RccRegs::init();
     let scb = ScbRegs::init();
@@ -118,8 +118,8 @@ pub extern fn SystemInit() {
 
     // /* Configure the System clock source, PLL Multiplier and Divider factors,
     //    AHB/APBx prescalers and Flash settings ----------------------------------*/
-    // SetSysClock();
-    SetSysClock();
+    // set_sys_clock();
+    set_sys_clock();
 
     // /* Configure the Vector Table location add offset address ------------------*/
     // #ifdef VECT_TAB_SRAM
@@ -132,7 +132,7 @@ pub extern fn SystemInit() {
 
 
 #[no_mangle]
-pub extern fn SetSysClock() {
+pub extern fn set_sys_clock() {
 /******************************************************************************/
 /*            PLL (clocked by HSE) used as System clock source                */
 /******************************************************************************/
