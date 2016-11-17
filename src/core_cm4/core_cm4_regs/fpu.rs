@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 //! Type definitions for the Cortex-M Floating Point Unit (FPU)
 
 use ::volatile_reg32::*;

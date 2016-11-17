@@ -1,3 +1,5 @@
+#![allow(dead_code)]
+
 //! Type definitions for the Cortex-M4 System Control Block registers
 
 use ::volatile_reg32::*;
