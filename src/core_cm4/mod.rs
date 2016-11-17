@@ -1,3 +1,3 @@
 
-pub mod core_cm4_const;
+pub mod constants;
 pub mod core_cm4_regs;
