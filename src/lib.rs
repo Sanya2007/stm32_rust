@@ -7,6 +7,7 @@
 mod volatile_reg32;
 mod stm32f4xx;
 mod core_cm4;
+mod hal;
 
 use core_cm4::core_cm4_regs::scb::*;
 
@@ -14,6 +15,7 @@ use stm32f4xx::regs::flash::*;
 use stm32f4xx::regs::gpio::*;
 use stm32f4xx::regs::pwr::*;
 use stm32f4xx::regs::rcc::*;
+use hal::gpio;
 
 
 #[lang = "panic_fmt"]
@@ -43,32 +45,32 @@ fn ms_delay(mut ms: u32) {
 
 #[no_mangle]
 pub extern fn main() {
-    // enable the clock to GPIOD
-    let rcc = RccRegs::init();
-    rcc.ahb1enr.bit_or(RCC_AHB1ENR_GPIODEN);
 
-    //*AHB1ENR |= RCC_AHB1ENR_GPIODEN;
-    // stall instruction pipeline, until instruction completes, as
-    // per Errata 2.1.13, "Delay after an RCC peripheral clock enabling"
-    unsafe {
-        asm!("dsb");
-    }
+    let mut pin_d12 = gpio::Pin::init(Port::GpioD, 12);
+    pin_d12.setup(gpio::PinMode::Output, gpio::PinOutputType::PushPull, gpio::PinSpeedType::Low, gpio::PinPullUpDown::NoPullUpDown);
 
-    let gpiod = GpioRegs::init(GpioPort::PortD);
-    gpiod.moder.set(0x55000000);
+    let mut pin_d13 = gpio::Pin::init(Port::GpioD, 13);
+    pin_d13.setup(gpio::PinMode::Output, gpio::PinOutputType::PushPull, gpio::PinSpeedType::Low, gpio::PinPullUpDown::NoPullUpDown);
+
+    let mut pin_d14 = gpio::Pin::init(Port::GpioD, 14);
+    pin_d14.setup(gpio::PinMode::Output, gpio::PinOutputType::PushPull, gpio::PinSpeedType::Low, gpio::PinPullUpDown::NoPullUpDown);
+
+    let mut pin_d15 = gpio::Pin::init(Port::GpioD, 15);
+    pin_d15.setup(gpio::PinMode::Output, gpio::PinOutputType::PushPull, gpio::PinSpeedType::Low, gpio::PinPullUpDown::NoPullUpDown);
+
 
     loop {
         ms_delay(500);
-        gpiod.odr.set(1 << 12);
+        pin_d12.toggle();
 
         ms_delay(500);
-        gpiod.odr.set(1 << 13);
+        pin_d13.toggle();
 
         ms_delay(500);
-        gpiod.odr.set(1 << 14);
+        pin_d14.toggle();
 
         ms_delay(500);
-        gpiod.odr.set(1 << 15);
+        pin_d15.toggle();
     }
 
 }
