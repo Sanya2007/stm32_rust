@@ -32,20 +32,17 @@ pub struct GpioRegs {
     /// GPIO port output data register,
     pub odr     : VolatileReg32,
 
-    /// GPIO port bit set/reset low register,
-    pub bsrrl   : VolatileReg32,
-
-    /// GPIO port bit set/reset high register,
-    pub bsrrh   : VolatileReg32,
+    /// GPIO port bit set/reset register,
+    pub bsrr   : VolatileReg32,
 
     /// GPIO port configuration lock register,
     pub lckr    : VolatileReg32,
 
     /// GPIO alternate function registers,
-    pub afr0    : VolatileReg32,
+    pub afrl    : VolatileReg32,
 
     /// GPIO alternate function registers,
-    pub afr1    : VolatileReg32,
+    pub afrh    : VolatileReg32,
 }
 
 pub enum GpioPort {
@@ -81,11 +78,10 @@ impl GpioRegs {
             pupdr   : VolatileReg32::new_offset(gpio_base, 3),
             idr     : VolatileReg32::new_offset(gpio_base, 4),
             odr     : VolatileReg32::new_offset(gpio_base, 5),
-            bsrrl   : VolatileReg32::new_offset(gpio_base, 6),
-            bsrrh   : VolatileReg32::new_offset(gpio_base, 7),
-            lckr    : VolatileReg32::new_offset(gpio_base, 8),
-            afr0    : VolatileReg32::new_offset(gpio_base, 9),
-            afr1    : VolatileReg32::new_offset(gpio_base, 10),
+            bsrr    : VolatileReg32::new_offset(gpio_base, 6),
+            lckr    : VolatileReg32::new_offset(gpio_base, 7),
+            afrl    : VolatileReg32::new_offset(gpio_base, 8),
+            afrh    : VolatileReg32::new_offset(gpio_base, 9),
         };
 
         gpio
