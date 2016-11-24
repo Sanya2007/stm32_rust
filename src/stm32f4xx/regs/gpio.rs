@@ -45,30 +45,30 @@ pub struct GpioRegs {
     pub afrh    : VolatileReg32,
 }
 
-pub enum GpioPort {
-    PortA,
-    PortB,
-    PortC,
-    PortD,
-    PortE,
-    PortF,
-    PortG,
-    PortH,
-    PortI,
+pub enum Port {
+    GpioA,
+    GpioB,
+    GpioC,
+    GpioD,
+    GpioE,
+    GpioF,
+    GpioG,
+    GpioH,
+    GpioI,
 }
 
 impl GpioRegs {
-    pub fn init(port: GpioPort) -> GpioRegs {
+    pub fn init(port: &Port) -> GpioRegs {
         let gpio_base: *mut u32 = match port {
-            GpioPort::PortA => GPIOA_BASE,
-            GpioPort::PortB => GPIOB_BASE,
-            GpioPort::PortC => GPIOC_BASE,
-            GpioPort::PortD => GPIOD_BASE,
-            GpioPort::PortE => GPIOE_BASE,
-            GpioPort::PortF => GPIOF_BASE,
-            GpioPort::PortG => GPIOG_BASE,
-            GpioPort::PortH => GPIOH_BASE,
-            GpioPort::PortI => GPIOI_BASE,
+            &Port::GpioA => GPIOA_BASE,
+            &Port::GpioB => GPIOB_BASE,
+            &Port::GpioC => GPIOC_BASE,
+            &Port::GpioD => GPIOD_BASE,
+            &Port::GpioE => GPIOE_BASE,
+            &Port::GpioF => GPIOF_BASE,
+            &Port::GpioG => GPIOG_BASE,
+            &Port::GpioH => GPIOH_BASE,
+            &Port::GpioI => GPIOI_BASE,
         } as *mut u32;
 
         let gpio = GpioRegs {
