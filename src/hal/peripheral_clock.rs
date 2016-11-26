@@ -1,6 +1,5 @@
 #![allow(dead_code)]
 
-use ::volatile_reg32::*;
 use ::stm32f4xx::regs::rcc::*;
 
 #[derive(Clone, Copy)]
