@@ -102,7 +102,7 @@ pub enum TimInst {
     TIM14,  // TIM14_BASE
 }
 
-impl TimInst {
+impl TimRegs {
     pub fn init(tim_inst: TimInst) -> TimRegs {
         let tim_base = match tim_inst {
             TimInst::TIM1   => TIM1_BASE,
