@@ -7,73 +7,73 @@ use super::constants::RCC_BASE;
 
 
 pub struct RccRegs {
-    /// RCC clock control register,
+    /// RCC clock control register
     pub cr              : VolatileReg32,
 
-    /// RCC PLL configuration register,
+    /// RCC PLL configuration register
     pub pllcfgr         : VolatileReg32,
 
-    /// RCC clock configuration register,
+    /// RCC clock configuration register
     pub cfgr            : VolatileReg32,
 
-    /// RCC clock interrupt register,
+    /// RCC clock interrupt register
     pub cir             : VolatileReg32,
 
-    /// RCC AHB1 peripheral reset register,
+    /// RCC AHB1 peripheral reset register
     pub ahb1rstr        : VolatileReg32,
 
-    /// RCC AHB2 peripheral reset register,
+    /// RCC AHB2 peripheral reset register
     pub ahb2rstr        : VolatileReg32,
 
-    /// RCC AHB3 peripheral reset register,
+    /// RCC AHB3 peripheral reset register
     pub ahb3rstr        : VolatileReg32,
 
-    /// RCC APB1 peripheral reset register,
+    /// RCC APB1 peripheral reset register
     pub apb1rstr        : VolatileReg32,
 
-    /// RCC APB2 peripheral reset register,
+    /// RCC APB2 peripheral reset register
     pub apb2rstr        : VolatileReg32,
 
-    /// RCC AHB1 peripheral clock register,
+    /// RCC AHB1 peripheral clock register
     pub ahb1enr         : VolatileReg32,
 
-    /// RCC AHB2 peripheral clock register,
+    /// RCC AHB2 peripheral clock register
     pub ahb2enr         : VolatileReg32,
 
-    /// RCC AHB3 peripheral clock register,
+    /// RCC AHB3 peripheral clock register
     pub ahb3enr         : VolatileReg32,
 
-    /// RCC APB1 peripheral clock enable register,
+    /// RCC APB1 peripheral clock enable register
     pub apb1enr         : VolatileReg32,
 
-    /// RCC APB2 peripheral clock enable register,
+    /// RCC APB2 peripheral clock enable register
     pub apb2enr         : VolatileReg32,
 
-    /// RCC AHB1 peripheral clock enable in low power mode register,
+    /// RCC AHB1 peripheral clock enable in low power mode register
     pub ahb1lpenr       : VolatileReg32,
 
-    /// RCC AHB2 peripheral clock enable in low power mode register,
+    /// RCC AHB2 peripheral clock enable in low power mode register
     pub ahb2lpenr       : VolatileReg32,
 
-    /// RCC AHB3 peripheral clock enable in low power mode register,
+    /// RCC AHB3 peripheral clock enable in low power mode register
     pub ahb3lpenr       : VolatileReg32,
 
-    /// RCC APB1 peripheral clock enable in low power mode register,
+    /// RCC APB1 peripheral clock enable in low power mode register
     pub apb1lpenr       : VolatileReg32,
 
-    /// RCC APB2 peripheral clock enable in low power mode register,
+    /// RCC APB2 peripheral clock enable in low power mode register
     pub apb2lpenr       : VolatileReg32,
 
-    /// RCC Backup domain control register,
+    /// RCC Backup domain control register
     pub bdcr            : VolatileReg32,
 
-    /// RCC clock control & status register,
+    /// RCC clock control & status register
     pub csr             : VolatileReg32,
 
-    /// RCC spread spectrum clock generation register,
+    /// RCC spread spectrum clock generation register
     pub sscgr           : VolatileReg32,
 
-    /// RCC PLLI2S configuration register,
+    /// RCC PLLI2S configuration register
     pub plli2scfgr      : VolatileReg32,
 }
 
