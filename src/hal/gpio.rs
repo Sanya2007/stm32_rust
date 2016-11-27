@@ -34,23 +34,54 @@ impl Pin {
         }
     }
 
-    pub fn setup(&mut self, mode: PinMode, output_type: PinOutputType,
-                speed: PinSpeedType, pull_up_down: PinPullUpDown) {
-
+    pub fn enable_clock(&self) {
         self.port.get_clock().enable();
+    }
 
+    pub fn setup_mode(&mut self, mode: PinMode) {
         let gpio = GpioRegs::init(&self.port);
         let mut mask: u32 = 0b11 << (2 * self.pin_num);
         mask = !mask;
 
-        let mut val: u32 = (mode as u32) << (2 * self.pin_num);
-        let mut reg = gpio.moder.get();
+        let val: u32 = (mode as u32) << (2 * self.pin_num);
+        let mut mode_reg = gpio.moder.get();
+
+        mode_reg &= mask;
+        mode_reg |= val;
+        gpio.moder.set(mode_reg);
+
         self.mode = mode;
 
-        reg &= mask;
-        reg |= val;
-        gpio.moder.set(reg);
+    }
+    pub fn setup_output_type(&self, output_type: PinOutputType) {
+        let gpio = GpioRegs::init(&self.port);
 
+        let val = (1 as u32) << self.pin_num;
+
+        if output_type == PinOutputType::OpenDrain {
+            gpio.otyper.bit_or(val);
+        } else if output_type == PinOutputType::PushPull{
+            gpio.otyper.bit_and(!val);
+        }
+    }
+
+    pub fn setup_speed(&self, speed: PinSpeed) {
+        let gpio = GpioRegs::init(&self.port);
+        gpio.ospeedr.bit_or((speed as u32) << (2 * self.pin_num));
+    }
+
+    pub fn setup_pull_up_down(&self, pull_up_down: PinPullUpDown) {
+        let gpio = GpioRegs::init(&self.port);
+        gpio.pupdr.bit_or((pull_up_down as u32) << (2 * self.pin_num));
+    }
+
+    pub fn setup_alt_func(&self, alt_func: u32) {
+        let gpio = GpioRegs::init(&self.port);
+        if self.pin_num < 8 {
+            gpio.afrl.bit_or(alt_func << (self.pin_num * 4));
+        } else {
+            gpio.afrh.bit_or(alt_func << ((self.pin_num - 8) * 4));
+        }
     }
 
     /// Set the value of the pin
@@ -102,7 +133,7 @@ pub enum PinOutputType {
 }
 
 #[derive(Clone, Copy, PartialEq)]
-pub enum PinSpeedType {
+pub enum PinSpeed {
     Low         = 0x00,
     Medium      = 0x01,
     High        = 0x02,
