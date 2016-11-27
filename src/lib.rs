@@ -15,7 +15,9 @@ use stm32f4xx::regs::flash::*;
 use stm32f4xx::regs::gpio::*;
 use stm32f4xx::regs::pwr::*;
 use stm32f4xx::regs::rcc::*;
+use stm32f4xx::regs::tim::*;
 use hal::gpio;
+use hal::peripheral_clock;
 
 
 #[lang = "panic_fmt"]
@@ -30,49 +32,93 @@ pub extern fn eh_personality() -> ! {
     loop {}
 }
 
-fn ms_delay(mut ms: u32) {
-    while ms > 0 {
-        ms -= 1;
-        let mut i: u32 = 59710;
-        while i > 0 {
-            i -= 1;
-            unsafe {
-                asm!("nop");
-            }
-        }
-    }
-}
-
 #[no_mangle]
 pub extern fn main() {
 
+    // Green LED
     let mut pin_d12 = gpio::Pin::init(Port::GpioD, 12);
-    pin_d12.setup(gpio::PinMode::Output, gpio::PinOutputType::PushPull, gpio::PinSpeedType::Low, gpio::PinPullUpDown::NoPullUpDown);
+    pin_d12.enable_clock();
+    pin_d12.setup_mode(gpio::PinMode::Output);
 
+    // Orange LED
     let mut pin_d13 = gpio::Pin::init(Port::GpioD, 13);
-    pin_d13.setup(gpio::PinMode::Output, gpio::PinOutputType::PushPull, gpio::PinSpeedType::Low, gpio::PinPullUpDown::NoPullUpDown);
+    pin_d13.setup_mode(gpio::PinMode::Output);
 
+    // Red LED
     let mut pin_d14 = gpio::Pin::init(Port::GpioD, 14);
-    pin_d14.setup(gpio::PinMode::Output, gpio::PinOutputType::PushPull, gpio::PinSpeedType::Low, gpio::PinPullUpDown::NoPullUpDown);
+    pin_d14.setup_mode(gpio::PinMode::Output);
 
+    // Blue LED
     let mut pin_d15 = gpio::Pin::init(Port::GpioD, 15);
-    pin_d15.setup(gpio::PinMode::Output, gpio::PinOutputType::PushPull, gpio::PinSpeedType::Low, gpio::PinPullUpDown::NoPullUpDown);
+    pin_d15.setup_mode(gpio::PinMode::Output);
+
+    // Enable clock for TIMER7
+    {
+        let clock_tim7 = peripheral_clock::PeripheralClock::Tim7;
+        clock_tim7.enable();
+    }
+    let tim7_regs = TimRegs::init(TimInst::TIM7);
+    tim7_regs.cr1.bit_or(TIM_CR1_OPM | TIM_CR1_URS);
+    tim7_regs.psc.set(42_000);
+    tim7_regs.arr.set(2);
+
+    let wait_ms = |time: u32| {
+        tim7_regs.arr.set(2 * time);
+        tim7_regs.cr1.bit_or(TIM_CR1_CEN);
+        while tim7_regs.sr.get() == 0 {
+
+        }
+        tim7_regs.sr.set(0);
+    };
+
+/*
+    // Setup pins for SPI
+    let mut reset = gpio::Pin::init(Port::GpioB, 10);
+    reset.enable_clock();
+    reset.setup_mode(gpio::PinMode::Output);
+    reset.setup_speed(gpio::PinSpeed::High);
+
+    let mut dc = gpio::Pin::init(Port::GpioB, 11);
+    reset.setup_mode(gpio::PinMode::Output);
+    reset.setup_speed(gpio::PinSpeed::High);
+
+    {
+        let mut cs = gpio::Pin::init(Port::GpioB, 12);
+        cs.setup_alt_func(5);
+        cs.setup_speed(gpio::PinSpeed::High);
+        cs.setup_mode(gpio::PinMode::AltFunc);
+
+        let mut sck = gpio::Pin::init(Port::GpioB, 13);
+        sck.setup_alt_func(5);
+        sck.setup_speed(gpio::PinSpeed::High);
+        sck.setup_mode(gpio::PinMode::AltFunc);
+
+        let mut miso = gpio::Pin::init(Port::GpioB, 14);
+        miso.setup_alt_func(5);
+        miso.setup_speed(gpio::PinSpeed::High);
+        miso.setup_mode(gpio::PinMode::AltFunc);
+
+        let mut mosi = gpio::Pin::init(Port::GpioB, 15);
+        mosi.setup_alt_func(5);
+        mosi.setup_speed(gpio::PinSpeed::High);
+        mosi.setup_mode(gpio::PinMode::AltFunc);
+    }
+*/
 
 
     loop {
-        ms_delay(500);
+        wait_ms(500);
         pin_d12.toggle();
 
-        ms_delay(500);
+        wait_ms(500);
         pin_d13.toggle();
 
-        ms_delay(500);
+        wait_ms(500);
         pin_d14.toggle();
 
-        ms_delay(500);
+        wait_ms(500);
         pin_d15.toggle();
     }
-
 }
 
 #[no_mangle]
