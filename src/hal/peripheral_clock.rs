@@ -2,7 +2,6 @@
 
 use ::stm32f4xx::regs::rcc::*;
 
-#[derive(Clone, Copy)]
 pub enum PeripheralClock {
     // AHB1
     GpioA,
@@ -85,7 +84,7 @@ impl PeripheralClock {
         self.set_bit(false);
     }
 
-    fn set_bit(self, set: bool) {
+    fn set_bit(&self, set: bool) {
         use self::PeripheralClock::*;
 
         let bit_pos: u32 = self.get_bit_pos();
@@ -93,7 +92,7 @@ impl PeripheralClock {
 
         let rcc = RccRegs::init();
 
-        let reg = match self {
+        let reg = match *self {
             GpioA | GpioB | GpioC | GpioD | GpioE | GpioF | GpioG | GpioH |
             GpioI | Crc | BkpSram | CcmDataRam | Dma1 | Dma2 | EthMac |
             EthMacTx | EthMacRx | EthMacPtp | OtgHs | OtgHsulpi =>
@@ -128,9 +127,9 @@ impl PeripheralClock {
 
     }
 
-    fn get_bit_pos(self) -> u32 {
+    fn get_bit_pos(&self) -> u32 {
         use self::PeripheralClock::*;
-        match self {
+        match *self {
             GpioA       => RCC_AHB1ENR_GPIOAEN      ,
             GpioB       => RCC_AHB1ENR_GPIOBEN      ,
             GpioC       => RCC_AHB1ENR_GPIOCEN      ,
